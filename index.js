@@ -8,8 +8,8 @@ var app4 =   new Vue({
     },
     mounted() {
       axios
-        .get('https://localhost:5001/api/Products/get/id/1')
+        .get('https://localhost:5001/api/Products/get/page/1')
         .then(response => (this.info = response));
     }
   })
-  
+

@@ -2,14 +2,4 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
-.demo {
-    font-family: sans-serif;
-    border: 1px solid #eee;
-    border-radius: 2px;
-    padding: 20px 30px;
-    margin-top: 1em;
-    margin-bottom: 40px;
-    user-select: none;
-    overflow-x: auto;
-  }
 </body>

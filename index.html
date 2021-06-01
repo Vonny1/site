@@ -26,9 +26,12 @@
         {{pages}}
     </div>
     <div id="app4" style="margin:auto;">
-        <button type="button" class="btn btn-dark" onclick="getPage(2)">Dark</button>
+        <div class = "paging" v-for="n in 10"> 
+            <button v-on:click="setPage(n)">{{n}}</button>
+        </div>
+            <button v-on:click="setSecond">setsecond</button>
         <div class="list d-flex flex-row flex-wrap">
-            <li v-for="product in info.data" :key="product.name" style="list-style-type:none;">
+            <li v-for="product in currPage.data" :key="product.name" style="list-style-type:none;">
                 <div class="card" style="width: 20rem;">
                     <div class="card-body" style="height: 200px;">
                         <button type="button " class="btn btn-danger"

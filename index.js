@@ -14,25 +14,32 @@ var app4 =   new Vue({
         }
     },
     methods: {
-        getPage(number)
+        setSecond: function(event)
         {
             axios
-            .get('https://localhost:5001/api/Products/get/page/${number}')
-            .then(response => (this.info = response));
-        }
+            .get('https://localhost:5001/api/Products/get/page/2')
+            .then(response => (this.currPage= response));
+            
+        },
+        setPage: function(pageNumber)
+        {
+            axios
+            .get('https://localhost:5001/api/Products/get/page/'+pageNumber)
+            .then(response => (this.currPage= response));
 
+        }
     },
     mounted() {
       axios
-        .get('https://localhost:5001/api/Products/get/page/1')
-        .then(response => (this.info= response));
+        .get('https://localhost:5001/api/Products/get/page/'+this.currPageNumber)
+        .then(response => (this.currPage= response));
     }
   })
 var app5 = new Vue({
     el: '#app5',
     data(){
         return{
-            pages: 10
+            pages: 1
         };
     },
     mounted(){

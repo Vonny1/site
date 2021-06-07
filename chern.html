@@ -1,0 +1,31 @@
+<div class="list d-flex flex-row flex-wrap">
+    <div v-for="product in currPage.data" :key="product.id" style="list-style-type:none;">
+        <div class="productvue" v-bind="product">
+            <div class="card" style="width: 20rem;">
+                <div class="card-body" style="height: 200px;">
+                    <button type="button " class="btn btn-danger"
+                        style="position: absolute; bottom: 0; right: 100px;">Delete</button>
+                    <button type="button " class="btn btn-success" data-toggle="modal" data-target="#myModal"
+                        style="position: absolute; bottom: 0; right: 0;">Edit</button>
+                    <h5 class="card-name">{{productvue.Name}}</h1>
+                        {{productvue.Category.Name}}
+                        <h4 class="card-cost">{{productvue.Cost}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="list d-flex flex-row flex-wrap">
+    <div class="productArray" v-for="product in currPage.data">
+        <div class="productvue" v-bind="product">
+            <div class="card" style="width: 20rem;">
+                <div class="card-body" style="height: 200px;">
+                    <h1>{{name}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

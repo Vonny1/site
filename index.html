@@ -6,11 +6,17 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="index.css">
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
 
 </head>
 
@@ -18,32 +24,64 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button type="button" class="btn btn-primary">+Add </button>
     </nav>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     <div id="app4" style="margin:auto;">
         <div class="list d-flex flex-row flex-wrap">
-            <li v-for="product in currPage.data" :key="product.name" style="list-style-type:none;">
-                <div class="card" style="width: 20rem;">
-                    <div class="card-body" style="height: 200px;">
-                        <button type="button " class="btn btn-danger"
-                            style="position: absolute; bottom: 0; right: 100px;">Delete</button>
-                        <button type="button " class="btn btn-success"
-                            style="position: absolute; bottom: 0; right: 0;">Edit</button>
-                        <h5 class="card-name">{{product.name}}</h1>
-                            {{product.category.name}}
-                            <h4 class="card-cost">{{product.cost}}</h2>
+            <productvue v-for="product in currPage.data" v-bind:key="product.id" v-bind:id="product.id"
+                v-bind:name="product.name" v-bind:cost="product.cost" v-bind:categoryid="product.categoryId"
+                v-bind:category="product.category" inline-template>
+                <div class="productvue-container">
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body" style="height: 200px;">
+                            <button type="button " class="btn btn-danger" v-on:click="alertName()"
+                                style="position: absolute; bottom: 0; right: 100px;">Delete</button>
+                            <button type="button " class="btn btn-success" data-toggle="modal" data-target="#myModal"
+                                style="position: absolute; bottom: 0; right: 0;">Edit</button>
+                            <h5 class="card-name">{{name}}</h1>
+                                {{category.name}}
+                                <h4 class="card-cost">{{cost}}</h2>
+                        </div>
                     </div>
                 </div>
+            </productvue>
         </div>
-        <div class ="paging d-flex flex-row flex-wrap justify-content-center" data-toggle="buttons" style="margin:auto">
-            <div class = "pagingButtons" v-for="n in pageCount"> 
-                <button type ="button" class="btn btn-primary" input type="radio"  v-on:click="setPage(n)">{{n}}</button>
+
+
+        <div class="paging d-flex flex-row flex-wrap justify-content-center" data-toggle="buttons" style="margin:auto">
+            <div class="pagingButtons" v-for="n in pageCount">
+                <button type="button" class="btn btn-primary" input type="radio" v-on:click="setPage(n)">{{n}}</button>
             </div>
             <div class="currentPage">{{n}} </div>
         </div>
     </div>
+
     <script src="index.js"></script>
 </body>
 

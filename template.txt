@@ -1,0 +1,37 @@
+<div class="productvue-container">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body" style="height: 200px;">
+            <button type="button " class="btn btn-danger"
+                style="position: absolute; bottom: 0; right: 100px;">Delete</button>
+            <button type="button " class="btn btn-success" data-toggle="modal" data-target="#myModal"
+                style="position: absolute; bottom: 0; right: 0;">Edit</button>
+            <h5 class="card-name">{{name}}</h1>
+                {{category.name}}
+                <h4 class="card-cost">{{cost}}</h2>
+        </div>
+    </div>
+</div>
+
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Modal body..
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -18,6 +18,9 @@ Vue.component('productvue',
     methods: {
       alertName: function (event) {
         alert(this.productobj.name);
+      },
+      onclickbutton(event){
+        this.$emit('clicked', this.productobj)
       }
     },
   }
@@ -38,7 +41,7 @@ Vue.component('productmodal',
                       <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                      test
+                      {{productobj.name}}
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -58,8 +61,11 @@ new Vue({
   el: '#app4',
   data() {
     return {
-      info: null
+      currentproduct: {}
     };
+  },
+  data:{
+    currentProduct:{}
   },
   props: {
     currPage: Array,
@@ -82,7 +88,11 @@ new Vue({
         .get('https://localhost:5001/api/Products/get/page/' + pageNumber)
         .then(response => (this.currPage = response));
 
+    },
+    onclickchild(value){
+      currentProduct = value
     }
+
 
   },
   mounted() {
@@ -91,7 +101,6 @@ new Vue({
       .then(response => (this.currPage = response));
   },
   created() {
-    axios
     axios
       .get('https://localhost:5001/api/Products/count')
       .then(response => (this.pageCount = Math.ceil(response.data / 12)));

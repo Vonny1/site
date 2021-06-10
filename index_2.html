@@ -18,8 +18,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button type="button" class="btn btn-primary">+Add </button>
     </nav>
-    <div id="app4" style="margin:auto;">
-        <productmodal></productmodal>
+    <div id="app4" style="margin:auto;" @clicked="onclickchild">
+        <productmodal v-bind:productmodalobj="currentproduct"></productmodal>
         <div class="list d-flex flex-row flex-wrap">
             <productvue v-for="product in currPage.data" v-bind:key="product.id" v-bind:productobj="product"
                 inline-template>
@@ -28,7 +28,7 @@
                             <div class="card-body" style="height: 200px;">
                                 <button type="button " class="btn btn-danger" v-on:click="alertName()"
                                     style="position: absolute; bottom: 0; right: 100px;">Delete</button>
-                                <button type="button " class="btn btn-success" data-toggle="modal" data-target="#exampleModal"
+                                <button type="button " class="btn btn-success" v-on:click="onclickbutton" data-toggle="modal" data-target="#exampleModal"
                                     style="position: absolute; bottom: 0; right: 0;">Edit</button>
                                 <h5 class="card-name">{{productobj.name}}</h1>
                                     {{productobj.category.name}}
@@ -38,12 +38,7 @@
                 </div>
             </productvue>
         </div>
-
-
-
-
-
-
+        
         <div class="paging d-flex flex-row flex-wrap justify-content-center" data-toggle="buttons" style="margin:auto">
             <div class="pagingButtons" v-for="n in pageCount">
                 <button type="button" class="btn btn-primary" input type="radio" v-on:click="setPage(n)">{{n}}</button>

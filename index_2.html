@@ -12,6 +12,43 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+        <title>Modal Component</title>
+        <script src="https://unpkg.com/vue"></script>
+        <link rel="stylesheet" type="text/css" href="/style.css" />
+        <!-- template for the modal component -->
+        <script type="text/x-template" id="modal-template">
+          <transition name="modal">
+            <div class="modal-mask">
+              <div class="modal-wrapper">
+                <div class="modal-container">
+    
+                  <div class="modal-header">
+                    <slot name="header">
+                      default header
+                    </slot>
+                  </div>
+    
+                  <div class="modal-body">
+                    <slot name="body">
+                      default body
+                    </slot>
+                  </div>
+    
+                  <div class="modal-footer">
+                    <slot name="footer">
+                      default footer
+                      <button class="modal-default-button" @click="$emit('close')">
+                        OK
+                      </button>
+                    </slot>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </transition>
+        </script>
+
 </head>
 
 <body style="margin:auto; width: 1000px;">
@@ -19,18 +56,32 @@
         <button type="button" class="btn btn-primary">+Add </button>
     </nav>
     <div id="app4" style="margin:auto;" >
-        <productmodal v-bind:productmodalobj="currentproduct"></productmodal>
+        <button id="show-modal" @click="showModal = true">Show Modal</button>
+        <!-- use the modal component, pass in the prop -->
+        <modal v-if="showModal" @close="showModal = false">
+          <!--
+        you can use custom content here to overwrite
+        default content
+      -->
+          <h3 slot="header">custom header</h3>
+        </modal>
+
+
+
         <div class="list d-flex flex-row flex-wrap">
             <productvue v-on:deleteclicked="onclickdelete" v-for="product in currPage.data" v-bind:key="product.id" v-bind:productobj="product"
                 inline-template>
                 <div class="productvue-container">
                         <div class="card" style="width: 20rem;">
                             <div class="card-body" style="height: 200px;">
-                                <button type="button " class="btn btn-danger" v-on:click="DeleteButton()"
+                                <!-- <test v-bind:producttest="productobj"></test> -->
+                                <productmodaldelete v-bind:deleteProduct="productobj"></productmodaldelete>
+                                <button type="button " class="btn btn-danger" v-on:click="DeleteButton()" data-toggle="modal" :data-target="'#demo' + index" 
                                     style="position: absolute; bottom: 0; right: 200px;">Delete</button>
 
-                                <button type="button " class="btn btn-success" v-on:click="onclickbutton" data-toggle="modal" data-target="#exampleModal"
+                                <button type="button " class="btn btn-success" v-on:click="onclickbutton" data-toggle="modal" data-target="#editModal"
                                     style="position: absolute; bottom: 0; right: 0;">Edit</button>
+
                                     <button type="button " class="btn btn-success" v-on:click="alertName()"
                                     style="position: absolute; bottom: 0; right: 100px;">INFO</button>
                                 <h5 class="card-name">{{productobj.name}}</h1>

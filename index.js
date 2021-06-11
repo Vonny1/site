@@ -1,16 +1,6 @@
 
 Vue.component('productvue',
   {
-    // props: {
-    //   id: Number,
-    //   name: String,
-    //   cost: Number,
-    //   categoryid: Number,
-    //   category: {
-    //     id: Number,
-    //     name: Number
-    //   }
-    // },
     props: {
       productobj: Object
     },
@@ -24,6 +14,19 @@ Vue.component('productvue',
     },
   }
 );
+Vue.component('test',
+{
+  props:{
+    producttest: Object
+  },
+  template:
+  `
+  <h4>{{producttest.name}}</h4>
+  `
+})
+Vue.component("modal", {
+  template: "#modal-template"
+});
 Vue.component('productmodaledit',
   {
     props: {
@@ -31,12 +34,12 @@ Vue.component('productmodaledit',
     },
     template:
       `
-      <div class="modalcont">
-      <div class="modal " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true" aria-hidden="true">
+      <div class="editmodalcont">
+      <div class="modal " id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-modal="true" aria-hidden="true">
           <div class="modal-dialog">
               <div class="modal-content">
                   <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <h5 class="modal-title" id="editModalLabel">Modal title</h5>
                       <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -53,10 +56,44 @@ Vue.component('productmodaledit',
   `
   }
 )
+Vue.component('productmodaldelete',
+{
+  props:{
+    deleteProduct:Object
+  },
+  template:
+  `
+  <div class="modalcont">
+  <div class="modal " id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-modal="true" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">Удаление</h5>
+                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+              {{currentProduct.name}}
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-danger">Удалить</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+`
+
+}
+)
 
 
 new Vue({
   el: '#app4',
+  data: {
+    showModal: false
+  },
   props: {
     currPage: Array,
     currPageNumber: {
@@ -66,6 +103,12 @@ new Vue({
     currentProduct:Object,
     pageCount: Number
 
+  },
+  mounted()
+  {
+    this.currentProduct={
+      name:"test"
+    }
   },
   methods: {
     setSecond: function (event) {
@@ -81,8 +124,8 @@ new Vue({
 
     },
     onclickdelete:function(value){
-      this.currentProduct=value
-      alert(this.currentProduct.name);
+      this.currentProduct=value;
+      // alert(this.currentProduct.name);
     }
 
 
@@ -96,6 +139,7 @@ new Vue({
     axios
       .get('https://localhost:5001/api/Products/count')
       .then(response => (this.pageCount = Math.ceil(response.data / 12)));
+
 
   }
 })

@@ -13,19 +13,18 @@ Vue.component('productvue',
     // },
     props: {
       productobj: Object
-
     },
     methods: {
       alertName: function (event) {
         alert(this.productobj.name);
       },
-      onclickbutton(event){
-        this.$emit('clicked', this.productobj)
+      DeleteButton(){
+        this.$emit('deleteclicked', this.productobj)
       }
     },
   }
 );
-Vue.component('productmodal',
+Vue.component('productmodaledit',
   {
     props: {
       productmodalobj: Object
@@ -41,7 +40,6 @@ Vue.component('productmodal',
                       <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                      {{productobj.name}}
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -59,20 +57,13 @@ Vue.component('productmodal',
 
 new Vue({
   el: '#app4',
-  data() {
-    return {
-      currentproduct: {}
-    };
-  },
-  data:{
-    currentProduct:{}
-  },
   props: {
     currPage: Array,
     currPageNumber: {
       type: Number,
       default: 1
     },
+    currentProduct:Object,
     pageCount: Number
 
   },
@@ -89,8 +80,9 @@ new Vue({
         .then(response => (this.currPage = response));
 
     },
-    onclickchild(value){
-      currentProduct = value
+    onclickdelete:function(value){
+      this.currentProduct=value
+      alert(this.currentProduct.name);
     }
 
 

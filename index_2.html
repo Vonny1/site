@@ -18,18 +18,21 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button type="button" class="btn btn-primary">+Add </button>
     </nav>
-    <div id="app4" style="margin:auto;" @clicked="onclickchild">
+    <div id="app4" style="margin:auto;" >
         <productmodal v-bind:productmodalobj="currentproduct"></productmodal>
         <div class="list d-flex flex-row flex-wrap">
-            <productvue v-for="product in currPage.data" v-bind:key="product.id" v-bind:productobj="product"
+            <productvue v-on:deleteclicked="onclickdelete" v-for="product in currPage.data" v-bind:key="product.id" v-bind:productobj="product"
                 inline-template>
                 <div class="productvue-container">
                         <div class="card" style="width: 20rem;">
                             <div class="card-body" style="height: 200px;">
-                                <button type="button " class="btn btn-danger" v-on:click="alertName()"
-                                    style="position: absolute; bottom: 0; right: 100px;">Delete</button>
+                                <button type="button " class="btn btn-danger" v-on:click="DeleteButton()"
+                                    style="position: absolute; bottom: 0; right: 200px;">Delete</button>
+
                                 <button type="button " class="btn btn-success" v-on:click="onclickbutton" data-toggle="modal" data-target="#exampleModal"
                                     style="position: absolute; bottom: 0; right: 0;">Edit</button>
+                                    <button type="button " class="btn btn-success" v-on:click="alertName()"
+                                    style="position: absolute; bottom: 0; right: 100px;">INFO</button>
                                 <h5 class="card-name">{{productobj.name}}</h1>
                                     {{productobj.category.name}}
                                     <h4 class="card-cost">{{productobj.cost}}</h2>
